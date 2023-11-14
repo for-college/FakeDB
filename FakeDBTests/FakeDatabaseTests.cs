@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FakeDB.Tests
 {
@@ -42,6 +44,8 @@ namespace FakeDB.Tests
             CollectionAssert.AreEqual(new List<User>(), allUsers);
         }
 
+        /** Авторизация **/
+
         [TestMethod]
         public void AuthenticateUser_ValidUser_ReturnsTrue()
         {
@@ -52,6 +56,19 @@ namespace FakeDB.Tests
 
             Assert.IsTrue(isAuthenticated);
         }
+
+        [TestMethod]
+        public void AuthenticateUser_ValidUser_ReturnsFalse()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+            fakeDb.AddUser("admin", "admin", 25, UserRole.User);
+
+            bool isAuthenticated = fakeDb.AuthenticateUser("admin1", "admin");
+
+            Assert.IsFalse(isAuthenticated);
+        }
+
+        /** Валидация **/
 
         [TestMethod]
         public void ValidateUsername_ValidUsername_ReturnsTrue()
@@ -73,5 +90,47 @@ namespace FakeDB.Tests
             Assert.IsFalse(isValidUsername);
         }
 
+        public void ValidateAge_ValidAge_ReturnsTrue()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+            bool isValidAge = fakeDb.ValidateAge("1", out _);
+
+            Assert.IsTrue(isValidAge);
+        }
+
+        [TestMethod]
+        public void ValidateAge_InvalidAge_ReturnsFalse()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+
+            bool isInvalidValidAge = fakeDb.ValidateAge("1asd", out _);
+
+            Assert.IsFalse(isInvalidValidAge);
+        }
+
+        [TestMethod]
+        public void LogOut_WithMessage_PrintsCorrectMessage()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+            StringWriter consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+
+            fakeDb.LogOut("Test message");
+
+            string expectedMessage = "Test message" + Environment.NewLine;
+            Assert.AreEqual(expectedMessage, consoleOutput.ToString());
+        }
+
+        [TestMethod]
+        public void LogOut_WithoutMessage_PrintsNothing()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+            StringWriter consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+
+            fakeDb.LogOut();
+
+            Assert.AreEqual("", consoleOutput.ToString());
+        }
     }
 }

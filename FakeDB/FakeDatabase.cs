@@ -44,6 +44,7 @@ namespace FakeDB
 
             LogOut();
         }
+
         public void InvalidLogin()
         {
             Console.WriteLine("Логин не прошел валидацию. Не вводите спец символы.");
@@ -55,8 +56,15 @@ namespace FakeDB
         {
             if (message != null) Console.WriteLine(message);
 
-            Console.ReadLine();
-            Environment.Exit(0);
+            /** 
+             * В тестах функция не завершает работу без этого. 
+             * Поэтому в дебаге мы не выполняем этот блок кода
+            **/
+
+            #if !DEBUG
+                Console.ReadLine();
+                Environment.Exit(0);
+            #endif
         }
     }
 }
