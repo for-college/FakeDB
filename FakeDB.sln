@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDB", "FakeDB\FakeDB.csproj", "{09FA7024-E1C1-4E35-8586-1A7E7D58FE2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDBTests", "FakeDBTests\FakeDBTests.csproj", "{7361756F-7C8D-4764-B90D-63C5FCA50D15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09FA7024-E1C1-4E35-8586-1A7E7D58FE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09FA7024-E1C1-4E35-8586-1A7E7D58FE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09FA7024-E1C1-4E35-8586-1A7E7D58FE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09FA7024-E1C1-4E35-8586-1A7E7D58FE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7361756F-7C8D-4764-B90D-63C5FCA50D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7361756F-7C8D-4764-B90D-63C5FCA50D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7361756F-7C8D-4764-B90D-63C5FCA50D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7361756F-7C8D-4764-B90D-63C5FCA50D15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {079BC204-EA62-417B-8362-79DA986FB0DF}
+	EndGlobalSection
+EndGlobal
