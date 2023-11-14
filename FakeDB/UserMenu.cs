@@ -55,7 +55,7 @@ namespace FakeDB
             }
         }
 
-        private void AddUser()
+        public void AddUser()
         {
             Console.Write("Логин: ");
             string newUser = Console.ReadLine();
@@ -74,7 +74,7 @@ namespace FakeDB
             Console.WriteLine("Пользователь успешно добавлен!");
         }
 
-        private void RemoveUser()
+        public void RemoveUser()
         {
             List<User> allUsers = fakeDb.GetAllUsers();
 
@@ -104,7 +104,7 @@ namespace FakeDB
             fakeDb.RemoveUser(usernameToRemove, currentUser);
         }
 
-        private void DisplayAllUsers()
+        public void DisplayAllUsers()
         {
             List<User> allUsers = fakeDb.GetAllUsers();
             foreach (var user in allUsers)

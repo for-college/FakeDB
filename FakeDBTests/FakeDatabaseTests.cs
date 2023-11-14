@@ -160,5 +160,75 @@ namespace FakeDB.Tests
             string expectedMessage = "Логин не прошел валидацию. Не вводите спец символы." + Environment.NewLine;
             Assert.AreEqual(expectedMessage, consoleOutput.ToString());
         }
+
+        /** **/
+        [TestMethod]
+        public void RemoveUser_AdminRemovesUser_Successfully()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+
+            // Add an admin user
+            fakeDb.AddUser("admin", "admin", 25, UserRole.Admin);
+
+            // Add a user to be removed
+            fakeDb.AddUser("userToRemove", "password123", 30, UserRole.User);
+
+            // Authenticate as admin and try to remove the user
+            fakeDb.RemoveUser("userToRemove", fakeDb.GetAllUsers()[0]);
+
+            var allUsers = fakeDb.GetAllUsers();
+
+            // Ensure that the user is removed successfully
+            Assert.AreEqual(1, allUsers.Count);
+            Assert.AreEqual("admin", allUsers[0].Username);
+        }
+
+        [TestMethod]
+        public void RemoveUser_NonAdminCannotRemoveUser()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+
+            fakeDb.AddUser("regularUser", "password123", 30, UserRole.User);
+
+            fakeDb.RemoveUser("regularUser", fakeDb.GetAllUsers()[0]);
+
+            var allUsers = fakeDb.GetAllUsers();
+
+            Assert.AreEqual(1, allUsers.Count);
+            Assert.AreEqual("regularUser", allUsers[0].Username);
+        }
+
+        [TestMethod]
+        public void RemoveUser_UserNotFound()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+
+            fakeDb.AddUser("admin", "admin", 25, UserRole.Admin);
+
+            fakeDb.RemoveUser("nonExistingUser", fakeDb.GetAllUsers()[0]);
+
+            var allUsers = fakeDb.GetAllUsers();
+
+            Assert.AreEqual(1, allUsers.Count);
+            Assert.AreEqual("admin", allUsers[0].Username);
+        }
+
+        [TestMethod]
+        public void RemoveUser_AdminRemovesUser_SuccessMessage()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+
+            fakeDb.AddUser("admin", "admin", 25, UserRole.Admin);
+
+            fakeDb.AddUser("userToRemove", "password123", 30, UserRole.User);
+
+            StringWriter consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+
+            fakeDb.RemoveUser("userToRemove", fakeDb.GetAllUsers()[0]);
+
+            string expectedMessage = "Удаление прошло успешно." + Environment.NewLine;
+            Assert.AreEqual(expectedMessage, consoleOutput.ToString());
+        }
     }
 }

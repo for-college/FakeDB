@@ -18,6 +18,7 @@ namespace FakeDB
             if (currentUser.Role != UserRole.Admin)
             {
                 Console.WriteLine("Недостаточно прав для удаления пользователя.");
+                return;
             }
 
             User userToRemove = users.Find(u => u.Username == usernameToRemove);
@@ -25,6 +26,7 @@ namespace FakeDB
             if (userToRemove == null)
             {
                 Console.WriteLine("Пользователь не найден.");
+                return;
             }
 
             users.Remove(userToRemove);
@@ -61,10 +63,10 @@ namespace FakeDB
              * Поэтому в дебаге мы не выполняем этот блок кода
             **/
 
-#if !DEBUG
+            #if !DEBUG
                 Console.ReadLine();
                 Environment.Exit(0);
-#endif
+            #endif
         }
     }
 }
