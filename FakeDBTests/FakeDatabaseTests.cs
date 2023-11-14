@@ -132,5 +132,33 @@ namespace FakeDB.Tests
 
             Assert.AreEqual("", consoleOutput.ToString());
         }
+
+        [TestMethod]
+        public void InvalidAge_PrintsCorrectMessage()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+            StringWriter consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+
+            Action invalidAgeAction = fakeDb.InvalidAge;
+            invalidAgeAction.Invoke();
+
+            string expectedMessage = "Возвраст не прошел валидацию. Введите целое число, которое больше 0." + Environment.NewLine;
+            Assert.AreEqual(expectedMessage, consoleOutput.ToString());
+        }
+
+        [TestMethod]
+        public void InvalidLogin_PrintsCorrectMessage()
+        {
+            FakeDatabase fakeDb = new FakeDatabase();
+            StringWriter consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+
+            Action invalidLoginAction = fakeDb.InvalidLogin;
+            invalidLoginAction.Invoke();
+
+            string expectedMessage = "Логин не прошел валидацию. Не вводите спец символы." + Environment.NewLine;
+            Assert.AreEqual(expectedMessage, consoleOutput.ToString());
+        }
     }
 }
