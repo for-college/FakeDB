@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="FakeDatabaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserMenuTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
