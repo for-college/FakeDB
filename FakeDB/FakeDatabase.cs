@@ -63,7 +63,7 @@ namespace FakeDB
              * Поэтому в дебаге мы не выполняем этот блок кода
             **/
 
-            #if !DEBUG
+            #if DEBUG
                 Console.ReadLine();
                 Environment.Exit(0);
             #endif
